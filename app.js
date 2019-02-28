@@ -71,7 +71,7 @@ var IGpingpong;
             this.app.ticker.add(this.update.bind(this));
         }
         gameController.prototype.start = function () { };
-        gameController.prototype.update = function () { };
+        gameController.prototype.update = function (delta) { };
         return gameController;
     }());
     IGpingpong.gameController = gameController;
@@ -101,12 +101,6 @@ var IGpingpong;
     }());
     IGpingpong.Paddle = Paddle;
 })(IGpingpong || (IGpingpong = {}));
-/// <reference path="Paddle.ts" />
-/// <reference path="pixi.js.d.ts" />
-var IGpingpong;
-(function (IGpingpong) {
-    IGpingpong.gc = new IGpingpong.gameController();
-})(IGpingpong || (IGpingpong = {}));
 /// <reference path="./gameController.ts" />
 var IGpingpong;
 (function (IGpingpong) {
@@ -114,13 +108,13 @@ var IGpingpong;
         __extends(pingpong, _super);
         function pingpong() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.ballPositionX = 1;
-            _this.ballPositionY = 1;
+            _this.ballVelocityX = 1;
+            _this.ballVelocityY = 1;
             return _this;
         }
         pingpong.prototype.start = function () {
-            this.paddle1 = new IGpingpong.Paddle(this.app.view.width / 2 - this.app.view.height, 10, 30, 200, this.app);
             this.paddle2 = new IGpingpong.Paddle(this.app.view.width / 2 - 50, this.app.view.height - 40, 30, 200, this.app);
+            this.paddle1 = new IGpingpong.Paddle(this.app.view.width / 2, 10, 30, 200, this.app);
             this.ball = new IGpingpong.Ball(this.app.view.width / 2, this.app.view.height / 2, 20, this.app);
             this.topBoundries = new IGpingpong.border(0, 0, 800 - 2, 5, this.app);
             this.rightBoundries = new IGpingpong.border(800 - 2, 0, 5, 800 - 2, this.app);
@@ -129,9 +123,16 @@ var IGpingpong;
         };
         pingpong.prototype.update = function () {
             var _this = this;
-            _this.ball.moveTo(this.ballPositionX, this.ballPositionY);
+            _this.ball.moveTo(this.ballVelocityX, this.ballVelocityY);
         };
         return pingpong;
     }(IGpingpong.gameController));
     IGpingpong.pingpong = pingpong;
+})(IGpingpong || (IGpingpong = {}));
+/// <reference path="Paddle.ts" />
+/// <reference path="pixi.js.d.ts" />
+/// <reference path="pingPongGameController.ts" />
+var IGpingpong;
+(function (IGpingpong) {
+    IGpingpong.gc = new IGpingpong.pingpong();
 })(IGpingpong || (IGpingpong = {}));
