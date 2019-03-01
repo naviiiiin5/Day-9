@@ -25,6 +25,7 @@ namespace IGpingpong {
          moveTo(x:number,y:number){
             this.graphics.x+=x;
             this.graphics.y=y;
+            
          }
      }
 }
