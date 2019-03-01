@@ -1,4 +1,6 @@
 /// <reference path="gameController.ts" />
+/// <reference path="Paddle.ts" />
+
 
 namespace IGpingpong{
     export class pingpong extends gameController{
@@ -12,11 +14,10 @@ namespace IGpingpong{
         private ballVelocityX=1;
         private ballVelocityY=1;
         collider!:Collider;
-       
-        //private mousePositionY:number;
+    
         start():void{
             this.paddle2=new Paddle(this.app.view.width/2,this.app.view.height-40,30,200,this.app);
-            this.paddle1=new Paddle(this.app.view.width/2-50,5,30,200,this.app);
+            this.paddle1=new Paddle(this.app.view.width/2-50,10,30,200,this.app);
             this.ball=new Ball(this.app.view.width/2-50,this.app.view.height/2,20,this.app);
             this.topBoundries=new border(0,0,800-2,5,this.app);
             this.rightBoundries=new border(800-2,0,5,800-2,this.app);
@@ -29,10 +30,11 @@ namespace IGpingpong{
            this.moveBall();
            this.paddle2Move();
            this.paddle1Move();
-           this.collider.check_collision(this.ball,this.bottomBoundries,function(){
+           if(this.collider.check_collision(this.ball,this.bottomBoundries))
+           {
                 _this.ballVelocityY *= -1;
                 _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
-           });
+           };
         }
         moveBall(){
             let _this=this;
@@ -49,24 +51,17 @@ namespace IGpingpong{
             }
         }
         paddle2Move(){
-            // let _this=this;
-            // if(this.app.renderer.plugins.interaction.mouse.global.x<0)
-            // {
-            //     _this.paddle2.x=0;
-            //     _this.paddle2.y=_this.paddle2.y;
-            //     _this.paddle2.moveTo(_this.paddle2.x,_this.paddle2.y);
-            // }
-            // if(this.app.renderer.plugins.interaction.mouse.global.x>_this.app.view.width)
-            // {
-            //     _this.paddle2.x=_this.app.view.width-100;
-            //    // mousePositionX=_this.app.view.width-_this.paddle1.width/2;
-            //     _this.paddle2.moveTo(_this.paddle2.x,_this.paddle2.y);
-            // }
-            // else{
-            //     _this.paddle2.x=this.app.renderer.plugins.interaction.mouse.global.x;
-            //     _this.paddle2.y=_this.paddle2.y;
-            //     _this.paddle2.moveTo(_this.paddle2.x,_this.paddle2.y);
-            // }
+            let position=this.app.renderer.plugins.interaction.mouse.global.x;
+            if(position<0){
+                position=0-this.paddle2.width/2-190;
+            }
+            if(position>this.app.view.width)
+            {
+                position =this.app.view.width-this.paddle2.width/2;
+            }
+            this.paddle2.graphics.position.x=position;
+            this.paddle2.graphics.position.x = position-this.paddle2.width/2;
+            
         }
     }
 }
