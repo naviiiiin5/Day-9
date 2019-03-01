@@ -105,19 +105,19 @@ var IGpingpong;
         Paddle.prototype.draw = function () {
             this.graphics.lineStyle(2, 0xFF00FF, 1);
             this.graphics.beginFill(0x650A5A, 0.25);
-            this.graphics.drawRect(this.x, this.y, this.width, this.height);
+            this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, 20);
             this.graphics.endFill();
             this.stage.stage.addChild(this.graphics);
         };
         Paddle.prototype.moveTo = function (x, y) {
-            this.graphics.x += x;
-            this.graphics.y += y;
+            this.graphics.x = x;
+            this.graphics.y = y;
         };
         return Paddle;
     }());
     IGpingpong.Paddle = Paddle;
 })(IGpingpong || (IGpingpong = {}));
-/// <reference path="./gameController.ts" />
+/// <reference path="gameController.ts" />
 var IGpingpong;
 (function (IGpingpong) {
     var pingpong = /** @class */ (function (_super) {
@@ -128,9 +128,10 @@ var IGpingpong;
             _this.ballVelocityY = 1;
             return _this;
         }
+        //private mousePositionY:number;
         pingpong.prototype.start = function () {
-            this.paddle2 = new IGpingpong.Paddle(this.app.view.width / 2 - 50, this.app.view.height - 40, 30, 200, this.app);
-            this.paddle1 = new IGpingpong.Paddle(this.app.view.width / 2, 10, 30, 200, this.app);
+            this.paddle2 = new IGpingpong.Paddle(this.app.view.width / 2, this.app.view.height - 40, 30, 200, this.app);
+            this.paddle1 = new IGpingpong.Paddle(this.app.view.width / 2 - 50, 5, 30, 200, this.app);
             this.ball = new IGpingpong.Ball(this.app.view.width / 2 - 50, this.app.view.height / 2, 20, this.app);
             this.topBoundries = new IGpingpong.border(0, 0, 800 - 2, 5, this.app);
             this.rightBoundries = new IGpingpong.border(800 - 2, 0, 5, 800 - 2, this.app);
@@ -142,6 +143,7 @@ var IGpingpong;
             var _this = this;
             this.moveBall();
             this.paddle2Move();
+            this.paddle1Move();
             this.collider.check_collision(this.ball, this.bottomBoundries, function () {
                 _this.ballVelocityY *= -1;
                 _this.ball.moveTo(_this.ballVelocityX, _this.ballVelocityY);
@@ -151,15 +153,31 @@ var IGpingpong;
             var _this = this;
             _this.ball.moveTo(this.ballVelocityX, this.ballVelocityY);
         };
+        pingpong.prototype.paddle1Move = function () {
+            var _this = this;
+            if (_this.paddle1.graphics.position.x == this.app.view.width / 2 - 150) {
+                _this.paddle1.x = _this.app.view.width - 100;
+            }
+            else {
+                _this.paddle1.moveTo(this.ballVelocityX, this.paddle1.y);
+            }
+        };
         pingpong.prototype.paddle2Move = function () {
             var _this = this;
             if (this.app.renderer.plugins.interaction.mouse.global.x < 0) {
-                this.paddle2.x = this.app.renderer.plugins.interaction.mouse.global.x;
-                //_this.paddle2.moveTo(,0);
+                _this.paddle2.x = 0;
+                _this.paddle2.y = _this.paddle2.y;
+                _this.paddle2.moveTo(_this.paddle2.x, _this.paddle2.y);
             }
-            if (this.app.renderer.plugins.interaction.mouse.global.x < this.app.view.width) {
-                this.paddle2.x = this.app.renderer.plugins.interaction.mouse.global.x;
-                //_this.paddle2.moveTo(,0);   
+            if (this.app.renderer.plugins.interaction.mouse.global.x > _this.app.view.width) {
+                _this.paddle2.x = _this.app.view.width - 100;
+                // mousePositionX=_this.app.view.width-_this.paddle1.width/2;
+                _this.paddle2.moveTo(_this.paddle2.x, _this.paddle2.y);
+            }
+            else {
+                _this.paddle2.x = this.app.renderer.plugins.interaction.mouse.global.x;
+                _this.paddle2.y = _this.paddle2.y;
+                _this.paddle2.moveTo(_this.paddle2.x, _this.paddle2.y);
             }
         };
         return pingpong;
