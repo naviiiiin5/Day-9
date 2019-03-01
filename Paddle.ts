@@ -18,13 +18,13 @@ namespace IGpingpong {
          draw(){
             this.graphics.lineStyle(2, 0xFF00FF, 1);
             this.graphics.beginFill(0x650A5A,0.25);
-            this.graphics.drawRect(this.x,this.y,this.width,this.height);
+            this.graphics.drawRoundedRect(this.x,this.y,this.width,this.height,20);
             this.graphics.endFill();
             this.stage.stage.addChild(this.graphics);
          }
          moveTo(x:number,y:number){
             this.graphics.x+=x;
-            this.graphics.y+=y;
+            this.graphics.y=y;
          }
      }
 }
