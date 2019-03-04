@@ -1,7 +1,5 @@
 /// <reference path="gameController.ts" />
 /// <reference path="Paddle.ts" />
-
-
 namespace IGpingpong{
     export class pingpong extends gameController{
         paddle1!:Paddle;
@@ -53,16 +51,15 @@ namespace IGpingpong{
         paddle2Move(){
             let position=this.app.renderer.plugins.interaction.mouse.global.x;
             if(position<0){
-                position=0-this.paddle2.width/2-50;
+                position=0-this.paddle2.width/2-90;
             }
             if(position>this.app.view.width)
             {
-                position =this.app.view.width-this.paddle2.width/2;
-                console.log(this.paddle2.width);
+                position =this.app.view.width-this.paddle2.width/2;   
             }
-            this.paddle2.graphics.x=position;
+            //this.paddle2.graphics.x=position;
             this.paddle2.graphics.x = position-this.paddle2.width/2;
-            
         }
+        
     }
 }
