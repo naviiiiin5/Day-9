@@ -26,9 +26,12 @@ var IGpingpong;
             this.graphics.beginFill(0x961251);
             this.graphics.drawCircle(this.x, this.y, this.radius);
             this.graphics.endFill();
+            this.graphics.pivot.set(-this.radius, -this.radius);
             this.stage.stage.addChild(this.graphics);
         };
         Ball.prototype.moveTo = function (x, y) {
+            this.x += x;
+            this.y += y;
             this.graphics.x += x;
             this.graphics.y += y;
         };
@@ -67,10 +70,10 @@ var IGpingpong;
         function Collider() {
         }
         Collider.prototype.check_collision = function (body1, body2) {
-            if (!((body1.y + body1.height) < (body2.y)) ||
-                (body1.y > (body2.y + body2.height)) ||
-                ((body1.x + body1.width) < body2.x) ||
-                (body1.x > (body2.x + body2.width))) {
+            if (body1.x < body2.x + body2.width &&
+                body1.x + body1.width > body2.x &&
+                body1.y < body2.y + body2.height &&
+                body1.height + body1.y > body2.y) {
                 return true;
             }
         };
@@ -140,7 +143,7 @@ var IGpingpong;
             this.topBoundries = new IGpingpong.border(0, 0, 800 - 2, 5, this.app);
             this.rightBoundries = new IGpingpong.border(800 - 2, 0, 5, 800 - 2, this.app);
             this.bottomBoundries = new IGpingpong.border(0, 800 - 2, 800 - 2, 5, this.app);
-            this.leftBounders = new IGpingpong.border(0, 0, 5, 800 - 2, this.app);
+            this.leftBoundries = new IGpingpong.border(0, 0, 5, 800 - 2, this.app);
             this.collider = new IGpingpong.Collider();
         };
         pingpong.prototype.update = function () {
@@ -152,7 +155,31 @@ var IGpingpong;
                 _this.ballVelocityY *= -1;
                 _this.ball.moveTo(_this.ballVelocityX, _this.ballVelocityY);
             }
-            ;
+            if (this.collider.check_collision(this.ball, this.rightBoundries)) {
+                _this.ballVelocityX *= -1;
+                _this.ball.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+            }
+            if (this.collider.check_collision(this.ball, this.topBoundries)) {
+                _this.ballVelocityY *= -1;
+                _this.ball.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+            }
+            if (this.collider.check_collision(this.ball, this.leftBoundries)) {
+                _this.ballVelocityX *= -1;
+                _this.ball.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+            }
+            if (this.collider.check_collision(this.ball, this.paddle1)) {
+                _this.ballVelocityY *= -1;
+                _this.ball.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+            }
+            if (this.collider.check_collision(this.ball, this.paddle2)) {
+                _this.ballVelocityY *= -1;
+                _this.ball.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX, _this.ballVelocityY);
+            }
         };
         pingpong.prototype.moveBall = function () {
             var _this = this;
