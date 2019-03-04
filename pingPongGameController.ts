@@ -8,7 +8,7 @@ namespace IGpingpong{
         topBoundries!:border;
         rightBoundries!:border;
         bottomBoundries!:border;
-        leftBounders!:border;
+        leftBoundries!:border;
         private ballVelocityX=1;
         private ballVelocityY=1;
         collider!:Collider;
@@ -20,7 +20,7 @@ namespace IGpingpong{
             this.topBoundries=new border(0,0,800-2,5,this.app);
             this.rightBoundries=new border(800-2,0,5,800-2,this.app);
             this.bottomBoundries=new border(0,800-2,800-2,5,this.app);
-            this.leftBounders=new border(0,0,5,800-2,this.app);
+            this.leftBoundries=new border(0,0,5,800-2,this.app);
             this.collider=new Collider();
         }  
         update():void{
@@ -32,7 +32,37 @@ namespace IGpingpong{
            {
                 _this.ballVelocityY *= -1;
                 _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
-           };
+           }
+           if(this.collider.check_collision(this.ball,this.rightBoundries))
+           {
+                _this.ballVelocityX *= -1;
+                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+           }
+           if(this.collider.check_collision(this.ball,this.topBoundries))
+           {
+                _this.ballVelocityY *= -1;
+                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+           }
+           if(this.collider.check_collision(this.ball,this.leftBoundries))
+           {
+                _this.ballVelocityX *= -1;
+                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+           }
+           if(this.collider.check_collision(this.ball,this.paddle1))
+           {
+                _this.ballVelocityY *= -1;
+                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+           }
+           if(this.collider.check_collision(this.ball,this.paddle2))
+           {
+                _this.ballVelocityY *= -1;
+                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+           }
         }
         moveBall(){
             let _this=this;
