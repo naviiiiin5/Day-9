@@ -134,7 +134,7 @@ var IGpingpong;
             return _this;
         }
         pingpong.prototype.start = function () {
-            this.paddle2 = new IGpingpong.Paddle(this.app.view.width / 2, this.app.view.height - 40, 30, 200, this.app);
+            this.paddle2 = new IGpingpong.Paddle(0, this.app.view.height - 40, 30, 200, this.app);
             this.paddle1 = new IGpingpong.Paddle(this.app.view.width / 2 - 50, 10, 30, 200, this.app);
             this.ball = new IGpingpong.Ball(this.app.view.width / 2 - 50, this.app.view.height / 2, 20, this.app);
             this.topBoundries = new IGpingpong.border(0, 0, 800 - 2, 5, this.app);
@@ -168,15 +168,15 @@ var IGpingpong;
             }
         };
         pingpong.prototype.paddle2Move = function () {
-            var position = this.app.renderer.plugins.interaction.mouse.global.x;
-            if (position < 0) {
-                position = 0 - this.paddle2.width / 2 - 90;
+            var mousePosition = this.app.renderer.plugins.interaction.mouse.global.x;
+            if (mousePosition < 0) {
+                mousePosition = 0;
             }
-            if (position > this.app.view.width) {
-                position = this.app.view.width - this.paddle2.width / 2;
+            if (mousePosition > this.app.view.width) {
+                mousePosition = this.app.view.width;
             }
-            //this.paddle2.graphics.x=position;
-            this.paddle2.graphics.x = position - this.paddle2.width / 2;
+            this.paddle2.x = mousePosition;
+            this.paddle2.graphics.position.x = mousePosition;
         };
         return pingpong;
     }(IGpingpong.gameController));
