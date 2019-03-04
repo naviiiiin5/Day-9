@@ -14,7 +14,7 @@ namespace IGpingpong{
         collider!:Collider;
     
         start():void{
-            this.paddle2=new Paddle(this.app.view.width/2,this.app.view.height-40,30,200,this.app);
+            this.paddle2=new Paddle(0,this.app.view.height-40,30,200,this.app);
             this.paddle1=new Paddle(this.app.view.width/2-50,10,30,200,this.app);
             this.ball=new Ball(this.app.view.width/2-50,this.app.view.height/2,20,this.app);
             this.topBoundries=new border(0,0,800-2,5,this.app);
@@ -49,16 +49,16 @@ namespace IGpingpong{
             }
         }
         paddle2Move(){
-            let position=this.app.renderer.plugins.interaction.mouse.global.x;
-            if(position<0){
-                position=0-this.paddle2.width/2-90;
+            let mousePosition=this.app.renderer.plugins.interaction.mouse.global.x;
+            if(mousePosition<0){
+                mousePosition=0;
             }
-            if(position>this.app.view.width)
+            if(mousePosition>this.app.view.width)
             {
-                position =this.app.view.width-this.paddle2.width/2;   
+                mousePosition =this.app.view.width; 
             }
-            //this.paddle2.graphics.x=position;
-            this.paddle2.graphics.x = position-this.paddle2.width/2;
+            this.paddle2.x=mousePosition;
+            this.paddle2.graphics.position.x = mousePosition;
         }
         
     }
