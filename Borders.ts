@@ -1,9 +1,9 @@
 namespace IGpingpong{
     export class border implements iRigidBody{
-        x:number;
-        y:number;
-        width:number;
-        height:number;
+        public x:number;
+        public y:number;
+        public width:number;
+        public height:number;
         stage:any;
         graphics=new PIXI.Graphics();
         constructor(x:number,y:number,width:number,height:number,stage:any){
