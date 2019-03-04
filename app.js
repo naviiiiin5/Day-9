@@ -170,13 +170,12 @@ var IGpingpong;
         pingpong.prototype.paddle2Move = function () {
             var position = this.app.renderer.plugins.interaction.mouse.global.x;
             if (position < 0) {
-                position = 0 - this.paddle2.width / 2 - 50;
+                position = 0 - this.paddle2.width / 2 - 90;
             }
             if (position > this.app.view.width) {
                 position = this.app.view.width - this.paddle2.width / 2;
-                console.log(this.paddle2.width);
             }
-            this.paddle2.graphics.x = position;
+            //this.paddle2.graphics.x=position;
             this.paddle2.graphics.x = position - this.paddle2.width / 2;
         };
         return pingpong;
