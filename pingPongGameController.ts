@@ -42,9 +42,9 @@ namespace IGpingpong{
         }
         paddle1Move(){
             let _this=this;
-            if(_this.paddle1.graphics.position.x==this.app.view.width/2-150)
+            if(_this.paddle1.graphics.position.x==this.app.view.width/2-50)
             {
-                _this.paddle1.x=_this.app.view.width-100;
+                _this.paddle1.x=_this.app.view.width;
             }
             else{
                 _this.paddle1.moveTo(this.ballVelocityX,this.paddle1.y);
@@ -53,14 +53,15 @@ namespace IGpingpong{
         paddle2Move(){
             let position=this.app.renderer.plugins.interaction.mouse.global.x;
             if(position<0){
-                position=0-this.paddle2.width/2-190;
+                position=0-this.paddle2.width/2-50;
             }
             if(position>this.app.view.width)
             {
                 position =this.app.view.width-this.paddle2.width/2;
+                console.log(this.paddle2.width);
             }
-            this.paddle2.graphics.position.x=position;
-            this.paddle2.graphics.position.x = position-this.paddle2.width/2;
+            this.paddle2.graphics.x=position;
+            this.paddle2.graphics.x = position-this.paddle2.width/2;
             
         }
     }
