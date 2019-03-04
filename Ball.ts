@@ -1,9 +1,9 @@
 namespace IGpingpong{
     export class Ball implements iRigidBody{
-        x:number;
-        y:number;
-        height:number;
-        width:number;
+        public x:number;
+        public y:number;
+        public height:number;
+        public width:number;
         stage:any;
         public radius:number;
         public graphics=new PIXI.Graphics();
@@ -21,9 +21,12 @@ namespace IGpingpong{
             this.graphics.beginFill(0x961251);
             this.graphics.drawCircle(this.x,this.y,this.radius);
             this.graphics.endFill();
+            this.graphics.pivot.set(-this.radius,-this.radius);
             this.stage.stage.addChild(this.graphics);
          }
          moveTo(x:number,y:number){
+            this.x+=x;
+            this.y+=y;
             this.graphics.x+=x;
             this.graphics.y+=y;  
         }
