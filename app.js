@@ -110,6 +110,7 @@ var IGpingpong;
             this.graphics.beginFill(0x650A5A, 0.25);
             this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, 20);
             this.graphics.endFill();
+            this.graphics.pivot.x = this.graphics.width / 2;
             this.stage.stage.addChild(this.graphics);
         };
         Paddle.prototype.moveTo = function (x, y) {
@@ -159,8 +160,8 @@ var IGpingpong;
         };
         pingpong.prototype.paddle1Move = function () {
             var _this = this;
-            if (_this.paddle1.graphics.position.x == this.app.view.width / 2 - 150) {
-                _this.paddle1.x = _this.app.view.width - 100;
+            if (_this.paddle1.graphics.position.x == this.app.view.width / 2 - 50) {
+                _this.paddle1.x = _this.app.view.width;
             }
             else {
                 _this.paddle1.moveTo(this.ballVelocityX, this.paddle1.y);
@@ -169,13 +170,14 @@ var IGpingpong;
         pingpong.prototype.paddle2Move = function () {
             var position = this.app.renderer.plugins.interaction.mouse.global.x;
             if (position < 0) {
-                position = 0 - this.paddle2.width / 2 - 190;
+                position = 0 - this.paddle2.width / 2 - 50;
             }
             if (position > this.app.view.width) {
                 position = this.app.view.width - this.paddle2.width / 2;
+                console.log(this.paddle2.width);
             }
-            this.paddle2.graphics.position.x = position;
-            this.paddle2.graphics.position.x = position - this.paddle2.width / 2;
+            this.paddle2.graphics.x = position;
+            this.paddle2.graphics.x = position - this.paddle2.width / 2;
         };
         return pingpong;
     }(IGpingpong.gameController));
