@@ -17,10 +17,10 @@ namespace IGpingpong{
             this.paddle2=new Paddle(0,this.app.view.height-40,30,200,this.app);
             this.paddle1=new Paddle(this.app.view.width/2-50,10,30,200,this.app);
             this.ball=new Ball(this.app.view.width/2-50,this.app.view.height/2,20,this.app);
-            this.topBoundries=new border(0,0,800-2,5,this.app);
+            this.topBoundries=new border(0,0,800-2,1,this.app);
             this.rightBoundries=new border(800-2,0,5,800-2,this.app);
             this.bottomBoundries=new border(0,800-2,800-2,5,this.app);
-            this.leftBoundries=new border(0,0,5,800-2,this.app);
+            this.leftBoundries=new border(0,0,1,800-2,this.app);
             this.collider=new Collider();
         }  
         update():void{
