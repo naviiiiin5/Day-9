@@ -9,13 +9,13 @@ namespace IGpingpong{
         rightBoundries!:border;
         bottomBoundries!:border;
         leftBoundries!:border;
-        private ballVelocityX=1;
-        private ballVelocityY=1;
+        private ballVelocityX=2;
+        private ballVelocityY=2;
         collider!:Collider;
     
         start():void{
             this.paddle2=new Paddle(0,this.app.view.height-40,30,200,this.app);
-            this.paddle1=new Paddle(this.app.view.width/2-50,10,30,200,this.app);
+            this.paddle1=new Paddle(this.app.view.width/2-50,5,30,200,this.app);
             this.ball=new Ball(this.app.view.width/2-50,this.app.view.height/2,20,this.app);
             this.topBoundries=new border(0,0,800-2,1,this.app);
             this.rightBoundries=new border(800-2,0,5,800-2,this.app);
@@ -31,37 +31,32 @@ namespace IGpingpong{
            if(this.collider.check_collision(this.ball,this.bottomBoundries))
            {
                 _this.ballVelocityY *= -1;
-                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+               
            }
            if(this.collider.check_collision(this.ball,this.rightBoundries))
            {
                 _this.ballVelocityX *= -1;
-                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
-                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+                
            }
            if(this.collider.check_collision(this.ball,this.topBoundries))
            {
                 _this.ballVelocityY *= -1;
-                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
-                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+               
            }
            if(this.collider.check_collision(this.ball,this.leftBoundries))
            {
                 _this.ballVelocityX *= -1;
-                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
-                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+               
            }
            if(this.collider.check_collision(this.ball,this.paddle1))
            {
                 _this.ballVelocityY *= -1;
-                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
-                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+               
            }
            if(this.collider.check_collision(this.ball,this.paddle2))
            {
                 _this.ballVelocityY *= -1;
-                _this.ball.moveTo(_this.ballVelocityX,_this.ballVelocityY);
-                _this.paddle1.moveTo(_this.ballVelocityX,_this.ballVelocityY);
+                
            }
         }
         moveBall(){
@@ -70,13 +65,8 @@ namespace IGpingpong{
         }
         paddle1Move(){
             let _this=this;
-            if(_this.paddle1.graphics.position.x==this.app.view.width/2-50)
-            {
-                _this.paddle1.x=_this.app.view.width;
-            }
-            else{
-                _this.paddle1.moveTo(this.ballVelocityX,this.paddle1.y);
-            }
+             _this.paddle1.moveTo(this.ballVelocityX,this.paddle1.y);
+
         }
         paddle2Move(){
             let mousePosition=this.app.renderer.plugins.interaction.mouse.global.x;
