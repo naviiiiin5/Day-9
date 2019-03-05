@@ -16,11 +16,10 @@ namespace IGpingpong {
                 this.draw();
          }
          draw(){
-            this.graphics.lineStyle(2, 0xFF00FF, 1);
-            this.graphics.beginFill(0x650A5A,0.25);
+            this.graphics.lineStyle(1, 0xFF00FF);
+            this.graphics.beginFill(0x961251);
             this.graphics.drawRoundedRect(this.x,this.y,this.width,this.height,20);
             this.graphics.endFill();
-            //this.graphics.pivot.x=this.graphics.width/2;
             this.stage.stage.addChild(this.graphics);
          }
          moveTo(x:number,y:number){
