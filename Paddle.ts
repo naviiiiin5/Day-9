@@ -24,6 +24,8 @@ namespace IGpingpong {
             this.stage.stage.addChild(this.graphics);
          }
          moveTo(x:number,y:number){
+            this.x+=x;
+            this.y=y;
             this.graphics.x+=x;
             this.graphics.y=y;
             
