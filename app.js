@@ -53,7 +53,7 @@ var IGpingpong;
         }
         border.prototype.draw = function () {
             this.graphics.beginFill(0xFFFFFF);
-            this.graphics.lineStyle(2, 0xFFFFFF, 1);
+            this.graphics.lineStyle(2, 0x000000, 1);
             this.graphics.drawRect(this.x, this.y, this.width, this.height);
             this.graphics.endFill();
             this.stage.stage.addChild(this.graphics);
@@ -85,7 +85,7 @@ var IGpingpong;
 (function (IGpingpong) {
     var gameController = /** @class */ (function () {
         function gameController() {
-            this.app = new PIXI.Application(800, 800);
+            this.app = new PIXI.Application({ width: 800, height: 800, backgroundColor: 0xffffff });
             document.body.appendChild(this.app.view);
             this.start();
             this.app.ticker.add(this.update.bind(this));
@@ -117,6 +117,8 @@ var IGpingpong;
             this.stage.stage.addChild(this.graphics);
         };
         Paddle.prototype.moveTo = function (x, y) {
+            this.x += x;
+            this.y = y;
             this.graphics.x += x;
             this.graphics.y = y;
         };
@@ -140,10 +142,10 @@ var IGpingpong;
             this.paddle2 = new IGpingpong.Paddle(0, this.app.view.height - 40, 30, 200, this.app);
             this.paddle1 = new IGpingpong.Paddle(this.app.view.width / 2 - 50, 10, 30, 200, this.app);
             this.ball = new IGpingpong.Ball(this.app.view.width / 2 - 50, this.app.view.height / 2, 20, this.app);
-            this.topBoundries = new IGpingpong.border(0, 0, 800 - 2, 5, this.app);
+            this.topBoundries = new IGpingpong.border(0, 0, 800 - 2, 1, this.app);
             this.rightBoundries = new IGpingpong.border(800 - 2, 0, 5, 800 - 2, this.app);
             this.bottomBoundries = new IGpingpong.border(0, 800 - 2, 800 - 2, 5, this.app);
-            this.leftBoundries = new IGpingpong.border(0, 0, 5, 800 - 2, this.app);
+            this.leftBoundries = new IGpingpong.border(0, 0, 1, 800 - 2, this.app);
             this.collider = new IGpingpong.Collider();
         };
         pingpong.prototype.update = function () {
