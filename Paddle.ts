@@ -20,7 +20,7 @@ namespace IGpingpong {
             this.graphics.beginFill(0x650A5A,0.25);
             this.graphics.drawRoundedRect(this.x,this.y,this.width,this.height,20);
             this.graphics.endFill();
-            this.graphics.pivot.x=this.graphics.width/2;
+            //this.graphics.pivot.x=this.graphics.width/2;
             this.stage.stage.addChild(this.graphics);
          }
          moveTo(x:number,y:number){
