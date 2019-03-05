@@ -18,7 +18,7 @@ namespace IGpingpong{
             this.draw();
          }
          draw(){
-            this.graphics.beginFill(0x961251);
+            this.graphics.beginFill(0xFFFFFF);
             this.graphics.drawCircle(this.x,this.y,this.radius);
             this.graphics.endFill();
             this.graphics.pivot.set(-this.radius,-this.radius);
