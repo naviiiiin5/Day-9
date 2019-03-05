@@ -53,7 +53,7 @@ var IGpingpong;
         }
         border.prototype.draw = function () {
             this.graphics.beginFill(0xFFFFFF);
-            this.graphics.lineStyle(2, 0x000000, 1);
+            this.graphics.lineStyle(2, 0xFFFFFF, 1);
             this.graphics.drawRect(this.x, this.y, this.width, this.height);
             this.graphics.endFill();
             this.stage.stage.addChild(this.graphics);
@@ -85,7 +85,7 @@ var IGpingpong;
 (function (IGpingpong) {
     var gameController = /** @class */ (function () {
         function gameController() {
-            this.app = new PIXI.Application({ width: 800, height: 800, backgroundColor: 0xffffff });
+            this.app = new PIXI.Application({ width: 800, height: 800, backgroundColor: 0x889978 });
             document.body.appendChild(this.app.view);
             this.start();
             this.app.ticker.add(this.update.bind(this));
@@ -109,11 +109,10 @@ var IGpingpong;
             this.draw();
         }
         Paddle.prototype.draw = function () {
-            this.graphics.lineStyle(2, 0xFF00FF, 1);
-            this.graphics.beginFill(0x650A5A, 0.25);
+            this.graphics.lineStyle(1, 0xFF00FF);
+            this.graphics.beginFill(0x961251);
             this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, 20);
             this.graphics.endFill();
-            //this.graphics.pivot.x=this.graphics.width/2;
             this.stage.stage.addChild(this.graphics);
         };
         Paddle.prototype.moveTo = function (x, y) {
