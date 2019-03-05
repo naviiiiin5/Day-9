@@ -30,7 +30,7 @@ namespace IGpingpong{
            this.paddle1Move();
            if(this.collider.check_collision(this.ball,this.bottomBoundries))
            {
-                _this.ballVelocityY *= -1;
+                this.app.stop();
                
            }
            if(this.collider.check_collision(this.ball,this.rightBoundries))
@@ -40,7 +40,7 @@ namespace IGpingpong{
            }
            if(this.collider.check_collision(this.ball,this.topBoundries))
            {
-                _this.ballVelocityY *= -1;
+               this.app.stop();
                
            }
            if(this.collider.check_collision(this.ball,this.leftBoundries))
