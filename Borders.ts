@@ -16,7 +16,7 @@ namespace IGpingpong{
         }
         draw(){
         this.graphics.beginFill(0xFFFFFF);
-        this.graphics.lineStyle(2, 0xFFFFFF, 1);
+        this.graphics.lineStyle(2, 0x000000, 1);
         this.graphics.drawRect(this.x,this.y,this.width,this.height);
         this.graphics.endFill();
         this.stage.stage.addChild(this.graphics);
