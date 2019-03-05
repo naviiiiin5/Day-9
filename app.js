@@ -85,7 +85,9 @@ var IGpingpong;
 (function (IGpingpong) {
     var gameController = /** @class */ (function () {
         function gameController() {
-            this.app = new PIXI.Application({ width: 800, height: 800, backgroundColor: 0x889978 });
+            this.app = new PIXI.Application({ width: 800, height: 800, transparent: true });
+            this.app.view.style.display = "block";
+            this.app.view.style.marginLeft = "500px";
             document.body.appendChild(this.app.view);
             this.start();
             this.app.ticker.add(this.update.bind(this));
@@ -153,13 +155,13 @@ var IGpingpong;
             this.paddle2Move();
             this.paddle1Move();
             if (this.collider.check_collision(this.ball, this.bottomBoundries)) {
-                _this.ballVelocityY *= -1;
+                this.app.stop();
             }
             if (this.collider.check_collision(this.ball, this.rightBoundries)) {
                 _this.ballVelocityX *= -1;
             }
             if (this.collider.check_collision(this.ball, this.topBoundries)) {
-                _this.ballVelocityY *= -1;
+                this.app.stop();
             }
             if (this.collider.check_collision(this.ball, this.leftBoundries)) {
                 _this.ballVelocityX *= -1;
