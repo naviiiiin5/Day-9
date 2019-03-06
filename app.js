@@ -134,7 +134,7 @@ var IGpingpong;
             this.draw();
         }
         Paddle.prototype.draw = function () {
-            this.graphics.lineStyle(1, 0xFF00FF);
+            this.graphics.lineStyle(1, 0xFFF0FF);
             this.graphics.beginFill(0x961251);
             this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, 15);
             this.graphics.endFill();
@@ -187,7 +187,7 @@ var IGpingpong;
                 this.app.stop();
                 PIXI.sound.stop("music");
                 clearInterval(this.interval);
-                setTimeout(this.startGame.start, 3000);
+                // setTimeout(this.startGame.start,3000);
             }
             if (this.collider.check_collision(this.ball, this.rightBoundries)) {
                 _this.ballVelocityX *= -1;
