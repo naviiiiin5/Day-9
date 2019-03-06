@@ -14,9 +14,9 @@ namespace IGpingpong{
         collider!:Collider;
     
         start():void{
-            this.paddle2=new Paddle(0,this.app.view.height-40,30,200,this.app);
-            this.paddle1=new Paddle(this.app.view.width/2-50,5,30,200,this.app);
-            this.ball=new Ball(this.app.view.width/2-50,this.app.view.height/2,20,this.app);
+            this.paddle2=new Paddle(0,this.app.view.height-40,20,200,this.app);
+            this.paddle1=new Paddle(this.app.view.width/2-50,5,20,200,this.app);
+            this.ball=new Ball(this.app.view.width/2-50,this.app.view.height/2,10,this.app);
             this.topBoundries=new border(0,0,800-2,1,this.app);
             this.rightBoundries=new border(800-2,0,5,800-2,this.app);
             this.bottomBoundries=new border(0,800-2,800-2,5,this.app);
