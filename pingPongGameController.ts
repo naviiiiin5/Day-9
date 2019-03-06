@@ -23,6 +23,7 @@ namespace IGpingpong{
             this.leftBoundries=new border(0,0,1,800-2,this.app);
             this.collider=new Collider();
             PIXI.sound.add("music","musical.mp3");
+            PIXI.sound.play("music");
             this.interval=setInterval(function(){
                 PIXI.sound.play("music");
             },7000);
