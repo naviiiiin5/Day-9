@@ -11,11 +11,13 @@ namespace IGpingpong{
         leftBoundries!:border;
         private ballVelocityX=5;
         private ballVelocityY=5;
+        private countPlayer1:number=1;
+        private countPlayer2:number=1;
         collider!:Collider;
         interval:any;
         startGame!:gameController;
         start():void{
-            this.paddle2=new Paddle(0,this.app.view.height-40,20,200,this.app);
+            this.paddle2=new Paddle(0,this.app.view.height-30,20,200,this.app);
             this.paddle1=new Paddle(this.app.view.width/2-50,5,20,200,this.app);
             this.ball=new Ball(this.app.view.width/2-50,this.app.view.height/2,10,this.app);
             this.topBoundries=new border(0,0,800-2,1,this.app);
@@ -65,13 +67,16 @@ namespace IGpingpong{
                 _this.ballVelocityY *= -1;
                 PIXI.sound.add("boing","boing.mp3");
                 PIXI.sound.play("boing");
-               
+                this.scorePlayer1.text=this.countPlayer1;
+                this.countPlayer1+=1;
            }
            if(this.collider.check_collision(this.ball,this.paddle2))
            {
                 _this.ballVelocityY *= -1;
                 PIXI.sound.add("boing","boing.mp3");
                 PIXI.sound.play("boing");
+                this.scorePlayer2.text=this.countPlayer1;
+                this.countPlayer2+=1;
            }
         }
         moveBall(){
