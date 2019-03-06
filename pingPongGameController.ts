@@ -41,7 +41,7 @@ namespace IGpingpong{
                 this.app.stop();
                 PIXI.sound.stop("music");
                 clearInterval(this.interval);
-                setTimeout(this.startGame.start,3000);
+                // setTimeout(this.startGame.start,3000);
                 
            }
            if(this.collider.check_collision(this.ball,this.rightBoundries))
