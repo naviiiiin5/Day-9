@@ -113,7 +113,7 @@ var IGpingpong;
         Paddle.prototype.draw = function () {
             this.graphics.lineStyle(1, 0xFF00FF);
             this.graphics.beginFill(0x961251);
-            this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, 20);
+            this.graphics.drawRoundedRect(this.x, this.y, this.width, this.height, 15);
             this.graphics.endFill();
             this.stage.stage.addChild(this.graphics);
         };
@@ -140,9 +140,9 @@ var IGpingpong;
             return _this;
         }
         pingpong.prototype.start = function () {
-            this.paddle2 = new IGpingpong.Paddle(0, this.app.view.height - 40, 30, 200, this.app);
-            this.paddle1 = new IGpingpong.Paddle(this.app.view.width / 2 - 50, 5, 30, 200, this.app);
-            this.ball = new IGpingpong.Ball(this.app.view.width / 2 - 50, this.app.view.height / 2, 20, this.app);
+            this.paddle2 = new IGpingpong.Paddle(0, this.app.view.height - 40, 20, 200, this.app);
+            this.paddle1 = new IGpingpong.Paddle(this.app.view.width / 2 - 50, 5, 20, 200, this.app);
+            this.ball = new IGpingpong.Ball(this.app.view.width / 2 - 50, this.app.view.height / 2, 10, this.app);
             this.topBoundries = new IGpingpong.border(0, 0, 800 - 2, 1, this.app);
             this.rightBoundries = new IGpingpong.border(800 - 2, 0, 5, 800 - 2, this.app);
             this.bottomBoundries = new IGpingpong.border(0, 800 - 2, 800 - 2, 5, this.app);
