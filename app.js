@@ -160,10 +160,12 @@ var IGpingpong;
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.ballVelocityX = 5;
             _this.ballVelocityY = 5;
+            _this.countPlayer1 = 1;
+            _this.countPlayer2 = 1;
             return _this;
         }
         pingpong.prototype.start = function () {
-            this.paddle2 = new IGpingpong.Paddle(0, this.app.view.height - 40, 20, 200, this.app);
+            this.paddle2 = new IGpingpong.Paddle(0, this.app.view.height - 30, 20, 200, this.app);
             this.paddle1 = new IGpingpong.Paddle(this.app.view.width / 2 - 50, 5, 20, 200, this.app);
             this.ball = new IGpingpong.Ball(this.app.view.width / 2 - 50, this.app.view.height / 2, 10, this.app);
             this.topBoundries = new IGpingpong.border(0, 0, 800 - 2, 1, this.app);
@@ -204,11 +206,15 @@ var IGpingpong;
                 _this.ballVelocityY *= -1;
                 PIXI.sound.add("boing", "boing.mp3");
                 PIXI.sound.play("boing");
+                this.scorePlayer1.text = this.countPlayer1;
+                this.countPlayer1 += 1;
             }
             if (this.collider.check_collision(this.ball, this.paddle2)) {
                 _this.ballVelocityY *= -1;
                 PIXI.sound.add("boing", "boing.mp3");
                 PIXI.sound.play("boing");
+                this.scorePlayer2.text = this.countPlayer1;
+                this.countPlayer2 += 1;
             }
         };
         pingpong.prototype.moveBall = function () {
