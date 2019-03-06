@@ -86,15 +86,32 @@ var IGpingpong;
     var gameController = /** @class */ (function () {
         function gameController() {
             this.app = new PIXI.Application({ width: 800, height: 800, transparent: true });
+            this.graphics = new PIXI.Graphics();
+            this.graphics.lineStyle(2, 0xFFFFFF, 1);
+            this.graphics.beginFill(0x961251);
+            this.graphics.drawRect(0, this.app.view.height / 2, this.app.view.width, 10);
+            this.graphics.endFill();
+            this.app.stage.addChild(this.graphics);
             this.app.view.style.display = "block";
             this.app.view.style.marginLeft = "500px";
+            var style = new PIXI.TextStyle({
+                fontFamily: 'Arial',
+                fontSize: 36,
+                fontStyle: 'italic',
+                fontWeight: 'bold',
+                fill: ['#ffffff', '#ffffff'],
+                stroke: '#4a1850',
+                strokeThickness: 5,
+            });
+            this.scorePlayer1 = new PIXI.Text('0', style);
+            this.scorePlayer1.x = this.app.view.width / 2;
+            this.scorePlayer1.y = this.app.view.height / 2 - 40;
+            this.app.stage.addChild(this.scorePlayer1);
+            this.scorePlayer2 = new PIXI.Text('0', style);
+            this.scorePlayer2.x = this.app.view.width / 2;
+            this.scorePlayer2.y = this.app.view.height / 2;
+            this.app.stage.addChild(this.scorePlayer2);
             document.body.appendChild(this.app.view);
-            //    PIXI.sound.Sound.from({
-            //       url: 'boing.mp3',
-            //       preload: true,
-            //       loaded: function(err, sound) {
-            //       }
-            //   });
             this.start();
             this.app.ticker.add(this.update.bind(this));
         }
@@ -141,8 +158,8 @@ var IGpingpong;
         __extends(pingpong, _super);
         function pingpong() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.ballVelocityX = 2;
-            _this.ballVelocityY = 2;
+            _this.ballVelocityX = 5;
+            _this.ballVelocityY = 5;
             return _this;
         }
         pingpong.prototype.start = function () {
@@ -154,11 +171,12 @@ var IGpingpong;
             this.bottomBoundries = new IGpingpong.border(0, 800 - 2, 800 - 2, 5, this.app);
             this.leftBoundries = new IGpingpong.border(0, 0, 1, 800 - 2, this.app);
             this.collider = new IGpingpong.Collider();
+            this.startGame = new IGpingpong.gameController();
             PIXI.sound.add("music", "musical.mp3");
             PIXI.sound.play("music");
             this.interval = setInterval(function () {
                 PIXI.sound.play("music");
-            }, 7000);
+            }, 8000);
         };
         pingpong.prototype.update = function () {
             var _this = this;
@@ -167,13 +185,16 @@ var IGpingpong;
             this.paddle1Move();
             if (this.collider.check_collision(this.ball, this.bottomBoundries)) {
                 this.app.stop();
+                PIXI.sound.stop("music");
                 clearInterval(this.interval);
+                setTimeout(this.startGame.start, 3000);
             }
             if (this.collider.check_collision(this.ball, this.rightBoundries)) {
                 _this.ballVelocityX *= -1;
             }
             if (this.collider.check_collision(this.ball, this.topBoundries)) {
                 this.app.stop();
+                PIXI.sound.stop("music");
                 clearInterval(this.interval);
             }
             if (this.collider.check_collision(this.ball, this.leftBoundries)) {
