@@ -12,7 +12,7 @@ namespace IGpingpong{
         private ballVelocityX=2;
         private ballVelocityY=2;
         collider!:Collider;
-    
+        interval:any;
         start():void{
             this.paddle2=new Paddle(0,this.app.view.height-40,20,200,this.app);
             this.paddle1=new Paddle(this.app.view.width/2-50,5,20,200,this.app);
@@ -22,6 +22,11 @@ namespace IGpingpong{
             this.bottomBoundries=new border(0,800-2,800-2,5,this.app);
             this.leftBoundries=new border(0,0,1,800-2,this.app);
             this.collider=new Collider();
+            PIXI.sound.add("music","musical.mp3");
+            this.interval=setInterval(function(){
+                PIXI.sound.play("music");
+            },7000);
+           
         }  
         update():void{
             let _this=this;
@@ -31,7 +36,7 @@ namespace IGpingpong{
            if(this.collider.check_collision(this.ball,this.bottomBoundries))
            {
                 this.app.stop();
-               
+                clearInterval(this.interval);
            }
            if(this.collider.check_collision(this.ball,this.rightBoundries))
            {
@@ -41,7 +46,7 @@ namespace IGpingpong{
            if(this.collider.check_collision(this.ball,this.topBoundries))
            {
                this.app.stop();
-               
+               clearInterval(this.interval);
            }
            if(this.collider.check_collision(this.ball,this.leftBoundries))
            {
@@ -51,12 +56,15 @@ namespace IGpingpong{
            if(this.collider.check_collision(this.ball,this.paddle1))
            {
                 _this.ballVelocityY *= -1;
+                PIXI.sound.add("boing","boing.mp3");
+                PIXI.sound.play("boing");
                
            }
            if(this.collider.check_collision(this.ball,this.paddle2))
            {
                 _this.ballVelocityY *= -1;
-                
+                PIXI.sound.add("boing","boing.mp3");
+                PIXI.sound.play("boing");
            }
         }
         moveBall(){
