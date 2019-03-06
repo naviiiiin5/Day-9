@@ -9,10 +9,11 @@ namespace IGpingpong{
         rightBoundries!:border;
         bottomBoundries!:border;
         leftBoundries!:border;
-        private ballVelocityX=2;
-        private ballVelocityY=2;
+        private ballVelocityX=5;
+        private ballVelocityY=5;
         collider!:Collider;
         interval:any;
+        startGame!:gameController;
         start():void{
             this.paddle2=new Paddle(0,this.app.view.height-40,20,200,this.app);
             this.paddle1=new Paddle(this.app.view.width/2-50,5,20,200,this.app);
@@ -22,11 +23,12 @@ namespace IGpingpong{
             this.bottomBoundries=new border(0,800-2,800-2,5,this.app);
             this.leftBoundries=new border(0,0,1,800-2,this.app);
             this.collider=new Collider();
+            this.startGame=new gameController();
             PIXI.sound.add("music","musical.mp3");
             PIXI.sound.play("music");
             this.interval=setInterval(function(){
                 PIXI.sound.play("music");
-            },7000);
+            },8000);
            
         }  
         update():void{
@@ -37,7 +39,10 @@ namespace IGpingpong{
            if(this.collider.check_collision(this.ball,this.bottomBoundries))
            {
                 this.app.stop();
+                PIXI.sound.stop("music");
                 clearInterval(this.interval);
+                setTimeout(this.startGame.start,3000);
+                
            }
            if(this.collider.check_collision(this.ball,this.rightBoundries))
            {
@@ -47,6 +52,7 @@ namespace IGpingpong{
            if(this.collider.check_collision(this.ball,this.topBoundries))
            {
                this.app.stop();
+               PIXI.sound.stop("music");
                clearInterval(this.interval);
            }
            if(this.collider.check_collision(this.ball,this.leftBoundries))
