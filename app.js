@@ -89,6 +89,12 @@ var IGpingpong;
             this.app.view.style.display = "block";
             this.app.view.style.marginLeft = "500px";
             document.body.appendChild(this.app.view);
+            //    PIXI.sound.Sound.from({
+            //       url: 'boing.mp3',
+            //       preload: true,
+            //       loaded: function(err, sound) {
+            //       }
+            //   });
             this.start();
             this.app.ticker.add(this.update.bind(this));
         }
@@ -148,6 +154,10 @@ var IGpingpong;
             this.bottomBoundries = new IGpingpong.border(0, 800 - 2, 800 - 2, 5, this.app);
             this.leftBoundries = new IGpingpong.border(0, 0, 1, 800 - 2, this.app);
             this.collider = new IGpingpong.Collider();
+            PIXI.sound.add("music", "musical.mp3");
+            this.interval = setInterval(function () {
+                PIXI.sound.play("music");
+            }, 7000);
         };
         pingpong.prototype.update = function () {
             var _this = this;
@@ -156,21 +166,27 @@ var IGpingpong;
             this.paddle1Move();
             if (this.collider.check_collision(this.ball, this.bottomBoundries)) {
                 this.app.stop();
+                clearInterval(this.interval);
             }
             if (this.collider.check_collision(this.ball, this.rightBoundries)) {
                 _this.ballVelocityX *= -1;
             }
             if (this.collider.check_collision(this.ball, this.topBoundries)) {
                 this.app.stop();
+                clearInterval(this.interval);
             }
             if (this.collider.check_collision(this.ball, this.leftBoundries)) {
                 _this.ballVelocityX *= -1;
             }
             if (this.collider.check_collision(this.ball, this.paddle1)) {
                 _this.ballVelocityY *= -1;
+                PIXI.sound.add("boing", "boing.mp3");
+                PIXI.sound.play("boing");
             }
             if (this.collider.check_collision(this.ball, this.paddle2)) {
                 _this.ballVelocityY *= -1;
+                PIXI.sound.add("boing", "boing.mp3");
+                PIXI.sound.play("boing");
             }
         };
         pingpong.prototype.moveBall = function () {
