@@ -1,7 +1,7 @@
 namespace IGpingpong{
    export class gameController{
       public app!: PIXI.Application;
-      scorePlayer1:any;
+      public scorePlayer1:any;
       scorePlayer2:any;
       public graphics!:PIXI.Graphics;
       constructor(){
