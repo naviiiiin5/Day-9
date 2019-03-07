@@ -189,6 +189,7 @@ var IGpingpong;
                 this.app.stop();
                 PIXI.sound.stop("music");
                 clearInterval(this.interval);
+                //this.app.stage.removeChild(this.ball.graphics);
                 // setTimeout(this.startGame.start,3000);
             }
             if (this.collider.check_collision(this.ball, this.rightBoundries)) {
@@ -213,7 +214,7 @@ var IGpingpong;
                 _this.ballVelocityY *= -1;
                 PIXI.sound.add("boing", "boing.mp3");
                 PIXI.sound.play("boing");
-                this.scorePlayer2.text = this.countPlayer1;
+                this.scorePlayer2.text = this.countPlayer2;
                 this.countPlayer2 += 1;
             }
         };
